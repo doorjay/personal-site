@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage local project data for Dorjé Pradhan's portfolio">
+
+    <title>Manage Projects | Dorjé Pradhan</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav> 
+            <ul>
+                <li><a href="dorjepradhan.html" data-view-transition>Home</a></li>
+                <li><a href="projects.html" data-view-transition>Play</a></li>
+                <li><a href="projects-crud.html" class="active" data-view-transition>Manage</a></li>
+                <li><a href="form-with-js.html" data-view-transition>Contact</a></li>
+                <li>
+                    <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
+                    <label for="theme-toggle"></label>
+                </li>
+            </ul>
+        </nav>
+    </header> 
+
+    <main> 
+        <noscript>
+            <p>
+                <strong>Note:</strong> JavaScript is required to edit the local project data.
+            </p>
+        </noscript>
+
+        <section id="intro">
+            <h1>Manage projects.</h1>
+            <p><em>Create, update, or delete projects stored in localStorage.</em></p>
+        </section>
+
+        <fieldset>
+            <legend>Project data (localStorage)</legend>
+
+            <form id="project-crud-form" novalidate>
+                <section aria-label="Choose CRUD action">
+                    <p><strong>Action:</strong></p>
+
+                    <label>
+                        <input type="radio" name="crud-action" value="create" checked>
+                        Create new project
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="crud-action" value="update">
+                        Update existing project
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="crud-action" value="delete">
+                        Delete project
+                    </label>
+                </section>
+
+                <section id="project-fields" aria-label="Project fields">
+                    <p>
+                        <strong>Note:</strong> For <em>create</em>, fill in the id and any other fields you want stored.
+                        For <em>update</em>, enter an existing id and only the fields you want to change.
+                        For <em>delete</em>, only the id is required.
+                    </p>
+
+                    <label id="id-label" for="project-id">Project id (required for all actions)</label><br>
+                    <input id="project-id" name="project-id" type="text" required><br>
+
+                    <label for="project-title">Title</label><br>
+                    <input id="project-title" name="project-title" type="text"><br>
+
+                    <label for="project-description">Description</label><br>
+                    <textarea id="project-description" name="project-description" rows="4"></textarea><br>
+
+                    <label for="project-image-small">Small image URL</label><br>
+                    <input id="project-image-small" name="project-image-small" type="url"><br>
+
+                    <label for="project-image-large">Large image URL</label><br>
+                    <input id="project-image-large" name="project-image-large" type="url"><br>
+
+                    <label for="project-image-alt">Image alt text</label><br>
+                    <input id="project-image-alt" name="project-image-alt" type="text"><br>
+
+                    <label for="project-link">Link (e.g. GitHub or live site)</label><br>
+                    <input id="project-link" name="project-link" type="url"><br>
+
+                    <label for="project-tags">Tags (comma-separated)</label><br>
+                    <input id="project-tags" name="project-tags" type="text" placeholder="HTML, CSS, JavaScript"><br>
+                </section>
+
+                <button type="submit">Apply changes</button>
+
+                <output id="crud-message"></output>
+            </form>
+        </fieldset>
+    </main>
+
+    <footer>
+        <p>© 2025 Dorjé Pradhan. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

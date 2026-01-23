@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal portfolio and resume of Dorjé Pradhan">
+
+    <title>Portfolio | Dorjé Pradhan</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body> 
+    
+
+    <header>
+        <nav> 
+            <ul>
+                <li><a href="dorjepradhan.html" class="active" data-view-transition>Home</a></li>
+                <li><a href="projects.html" data-view-transition>Play</a></li>
+                <li><a href="projects-crud.html" data-view-transition>Manage</a></li>
+                <li><a href="form-with-js.html" data-view-transition>Contact</a></li>
+                <li>
+                    <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
+                    <label for="theme-toggle"></label>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main> 
+        <noscript>
+            <p>
+                <strong>Note:</strong> The theme switch will not persist 
+                between pages or vists when JavaScript is off.
+            </p>
+        </noscript>
+
+        <section id="intro"> 
+            <h1>Hi. I'm Dorjé.</h1>
+            <figure>
+                <picture>
+                    <source
+                        srcset="images/Profile-small.jpg 480w, 
+                                images/Profile-medium.jpg 800w, 
+                                images/Profile.jpg 1440w"
+                        sizes="(min-width: 700px) 90vw, 200px"
+                        type="image/jpg"
+                    >
+                    <img
+                        src="images/Profile.jpg"
+                        alt="Portrait of Dorjé Pradhan"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </picture>
+                <figcaption>
+                    Hi there, I'm Dorjé Pradhan! Welcome to my website.
+                    <br><br>I want to build clean, creative, and efficient websites. 
+                    I care about how things look <em>and</em> how they work.
+                </figcaption>
+            </figure>
+
+
+        </section>
+
+        <hr>
+
+        <!-- Resume Section-->
+         <section id="resume">
+            <h2>Resumé</h2>
+
+            <article>
+                <h3>Experience</h3>
+                <ul>
+                    <li>
+                        <strong>Front-End Developer</strong> - <em>Freelance</em> <br>
+                        <span>2024 - Present</span>
+                        <p>Building and maintaining a responsive website for Team Ate.</p>
+                    </li>
+                    <li>
+                        <strong>California Public Interest Research Group Intern</strong> - <em>Coalitions Coordinator</em> <br>
+                        <span>2025 - Present</span>
+                        <p>
+                            Responsible for creating strong relationships with on and off campus 
+                            organizations and connecting them with appropriate Campaign Coordinators.
+                        </p>
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Education</h3>
+                <p><strong>AS in Computer Science</strong> <br> Orange Coast College, 2024</p>
+            </article>
+
+            <article>
+                <h3>Skills</h3>
+                <ul>
+                    <li>HTML / CSS / JavaScript / C / C++ / Python / Java</li>
+                    <li>Responsive Design</li>
+                    <li>Git & GitHub</li>
+                </ul>
+            </article>
+
+         </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Dorjé Pradhan. All rights reserved.</p>
+    </footer>
+
+    <template id="greeting-template">
+        <p>Hello, and welcome to my portfolio!</p>
+    </template>
+
+    <script>
+        // This is my Hello World custom element (I promise I'm not cheating by using JS)
+        class HelloWorld extends HTMLElement {
+            constructor() {
+                super();
+                console.log("Hello world!");
+            }
+        }
+        customElements.define('hello-world', HelloWorld);
+    </script>
+
+    <hello-world></hello-world>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Project portfolio and resume of Dorjé Pradhan">
+
+    <title>Portfolio | Dorjé Pradhan</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body> 
+    <header>
+        <nav> 
+            <ul>
+                <li><a href="dorjepradhan.html" data-view-transition>Home</a></li>
+                <li><a href="projects.html" class="active" data-view-transition>Play</a></li>
+                <li><a href="projects-crud.html" data-view-transition>Manage</a></li>
+                <li><a href="form-with-js.html" data-view-transition>Contact</a></li>
+                <li>
+                    <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
+                    <label for="theme-toggle"></label>
+                </li>
+            </ul>
+        </nav>
+    </header> 
+
+    <main> 
+        <noscript>
+            <p>
+                <strong>Note:</strong> The theme switch will not persist 
+                between pages or vists when JavaScript is off.
+            </p>
+        </noscript>
+        <section id="intro">
+            <h1>Play.</h1>
+            <p><i>A small collection of projects I've worked on for fun or for school.</i></p>
+            <noscript>
+                <p><strong>Note:</strong> Some interative elements may not display without JavaScript enabled.</p>
+            </noscript>
+        </section>
+
+        <section id="project-list">
+        <h1>Projects</h1>
+
+            <section id="project-controls">
+                <button type="button" id="load-local">
+                    Load Local
+                </button>
+
+                <button type="button" id="load-remote">
+                    Load Remote
+                </button>
+            </section>
+
+            <section id="project-cards">
+                <!-- <project-card> elements will be added here by JavaScript -->
+                <noscript>
+                    <p>
+                        JavaScript is required to display project cards on this page.
+                    </p>
+                </noscript>
+            </section>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <p>© 2025 Dorjé Pradhan. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
