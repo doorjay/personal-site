@@ -6,7 +6,7 @@ print "Content-type: text/html \n\n";
 print <<END;
 <!DOCTYPE html>
 <html><head><title>Environment Variables</title>
-</head><body><h1 align="center">Environment Variables</h1>
+</head><body><h1 align="center">Environment Variables by Dorje Pradhan</h1>
 <hr>
 END
 

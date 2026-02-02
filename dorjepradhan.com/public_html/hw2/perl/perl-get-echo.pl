@@ -6,7 +6,7 @@ print "Content-type: text/html \n\n";
 print <<END;
 <!DOCTYPE html>
 <html><head><title>GET Request Echo</title>
-</head><body><h1 align="center">Get Request Echo</h1>
+</head><body><h1 align="center">Get Request Echo by Dorje Pradhan</h1>
 <hr>
 END
 
