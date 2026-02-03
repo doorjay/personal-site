@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, jspon, datetime
+import os, json, datetime
 
 print("Cache-Control: no-cache")
 print("Content-Type: application/json\n")
