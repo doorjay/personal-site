@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Echo Form</title>
+</head>
+<body>
+  <h1>Echo Form</h1>
+
+  <noscript>
+    <p><b>JavaScript is off:</b> This page will only do GET urlencoded to the default endpoint.</p>
+  </noscript>
+
+  <form id="echoForm" action="/hw2/python/echo-python.py" method="GET">
+    <label>Language:
+      <select id="lang">
+        <option value="python">Python</option>
+        <option value="ruby">Ruby</option>
+        <option value="cpp">C/C++</option>
+      </select>
+    </label>
+
+    <br/><br/>
+
+    <label>Method:
+      <select id="method">
+        <option>GET</option>
+        <option>POST</option>
+        <option>PUT</option>
+        <option>DELETE</option>
+      </select>
+    </label>
+
+    <br/><br/>
+
+    <label>Encoding:
+      <select id="encoding">
+        <option value="urlencoded">x-www-form-urlencoded</option>
+        <option value="json">application/json</option>
+      </select>
+    </label>
+
+    <br/><br/>
+
+    <label>Field 1:
+      <input name="field1" id="field1" value="hello">
+    </label>
+    <br/>
+    <label>Field 2:
+      <input name="field2" id="field2" value="world">
+    </label>
+
+    <br/><br/>
+    <button type="submit">Send</button>
+  </form>
+
+  <script>
+    const endpoints = {
+      python: "/hw2/python/echo-python.py",
+      ruby:   "/hw2/ruby/echo-ruby.rb",
+      cpp:    "/hw2/c/echo-cpp.cgi"
+    };
+
+    const form = document.getElementById("echoForm");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const lang = document.getElementById("lang").value;
+      const method = document.getElementById("method").value;
+      const encoding = document.getElementById("encoding").value;
+
+      const endpoint = endpoints[lang];
+
+      const data = {
+        field1: document.getElementById("field1").value,
+        field2: document.getElementById("field2").value
+      };
+
+      // Build request based on method + encoding
+      let url = endpoint;
+      let options = { method };
+
+      if (method === "GET") {
+        const qs = new URLSearchParams(data).toString();
+        url = endpoint + "?" + qs;
+      } else {
+        if (encoding === "json") {
+          options.headers = { "Content-Type": "application/json" };
+          options.body = JSON.stringify(data);
+        } else {
+          options.headers = { "Content-Type": "application/x-www-form-urlencoded" };
+          options.body = new URLSearchParams(data).toString();
+        }
+      }
+
+      const resp = await fetch(url, options);
+      const text = await resp.text();
+
+      // Make it feel like a real form submission: replace the page
+      document.open();
+      document.write(text);
+      document.close();
+    });
+
+    // Progressive enhancement: keep action/method reasonable if JS turned off later
+    document.getElementById("lang").addEventListener("change", () => {
+      const lang = document.getElementById("lang").value;
+      form.action = endpoints[lang];
+    });
+  </script>
+</body>
+</html>
