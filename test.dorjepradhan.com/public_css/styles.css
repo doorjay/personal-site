@@ -1,0 +1,128 @@
+:root
+{
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+
+  --radius: 0.75rem;
+  --border: 1px solid #d0d0d0;
+
+  --measure: 70ch;
+}
+
+*
+{
+  box-sizing: border-box;
+}
+
+body
+{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  padding: var(--space-4);
+  max-width: var(--measure);
+}
+
+header,
+main,
+footer
+{
+  display: block;
+}
+
+header
+{
+  margin-bottom: var(--space-3);
+}
+
+nav a
+{
+  margin-right: var(--space-2);
+}
+
+a
+{
+  text-decoration: none;
+}
+
+a:hover,
+a:focus
+{
+  text-decoration: underline;
+}
+
+section
+{
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  margin: var(--space-3) 0;
+}
+
+.controls
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+button
+{
+  padding: 0.6rem 1rem;
+  border: var(--border);
+  border-radius: 0.5rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:focus
+{
+  outline: 2px solid currentColor;
+  outline-offset: 0.2rem;
+}
+
+label
+{
+  display: block;
+  margin-top: var(--space-2);
+}
+
+input,
+select
+{
+  width: min(100%, 30ch);
+  padding: 0.55rem 0.75rem;
+  border: var(--border);
+  border-radius: 0.5rem;
+}
+
+fieldset
+{
+  border: 0;
+  padding: 0;
+  margin: var(--space-2) 0 0 0;
+}
+
+#scrollBox
+{
+  height: 10rem;
+  overflow: auto;
+  border: var(--border);
+  border-radius: 0.5rem;
+  padding: var(--space-2);
+}
+
+#log
+{
+  height: 8rem;
+  overflow: auto;
+  border: var(--border);
+  border-radius: 0.5rem;
+  padding: var(--space-2);
+  background: #f7f7f7;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+}

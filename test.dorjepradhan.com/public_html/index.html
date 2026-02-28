@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Test Site - Home</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/public_css/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Test Site</h1>
+
+    <nav aria-label="Primary">
+      <a href="/index.html" aria-current="page">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="interactive-heading">
+      <h2 id="interactive-heading">Interactive Buttons</h2>
+
+      <div class="controls">
+        <button id="btnLike" type="button">Like</button>
+        <button id="btnReset" type="button">Reset</button>
+        <button id="btnError" type="button">Trigger JS Error</button>
+      </div>
+
+      <p>Likes: <strong id="likeCount">0</strong></p>
+    </section>
+
+    <section aria-labelledby="log-heading">
+      <h2 id="log-heading">Local Event Log</h2>
+      <output id="log" aria-live="polite"></output>
+    </section>
+  </main>
+
+  <footer>
+    <small>Test site for analytics assignment.</small>
+  </footer>
+</body>
+</html>

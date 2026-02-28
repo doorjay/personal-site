@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Test Site - About</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/public_css/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>About</h1>
+
+    <nav aria-label="Primary">
+      <a href="/index.html">Home</a>
+      <a href="/about.html" aria-current="page">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="scroll-heading">
+      <h2 id="scroll-heading">Scroll Test</h2>
+      <p>Scroll inside the box below to create scroll activity.</p>
+
+      <section id="scrollBox" aria-label="Scrollable content">
+        <p>Keep scrolling…</p>
+        <p style="margin-top: 40rem;">Bottom reached ✅</p>
+      </section>
+    </section>
+
+    <section aria-labelledby="log-heading">
+      <h2 id="log-heading">Local Event Log</h2>
+      <output id="log" aria-live="polite"></output>
+    </section>
+  </main>
+
+  <footer>
+    <small>Test site for analytics assignment.</small>
+  </footer>
+</body>
+</html>
