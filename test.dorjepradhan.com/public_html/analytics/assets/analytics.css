@@ -104,9 +104,6 @@ body {
     margin-bottom: 16px;
 }
 
-.narrow-card {
-    max-width: 460px;
-}
 
 .stats-grid {
     display: grid;
