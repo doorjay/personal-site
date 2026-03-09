@@ -42,15 +42,6 @@ render_header('Dashboard');
 </section>
 
 <section class="card">
-    <h2>Checkpoint map</h2>
-    <ul>
-        <li><strong>Authentication:</strong> this dashboard, the reports page, and the charts page all require login.</li>
-        <li><strong>Datastore to table:</strong> the Reports Table page reads live rows from MariaDB.</li>
-        <li><strong>Datastore to chart:</strong> the Charts page renders Chart.js charts using MariaDB data.</li>
-    </ul>
-</section>
-
-<section class="card">
     <h2>Recent events</h2>
     <div class="table-wrap">
         <table>

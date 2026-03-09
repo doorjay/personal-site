@@ -8,13 +8,14 @@ require_login();
 render_header('Charts');
 ?>
 <section class="card">
-    <h2>Charts from MariaDB</h2>
-    <p>The charts below pull aggregated data from protected PHP API endpoints and render them with Chart.js.</p>
+    <h2>Event counts by type</h2>
+    <p>his bar chart shows how many tracked events were recorded for each event type in the MariaDB <i>events</i> table.</p>
     <canvas id="eventsByTypeChart" height="120"></canvas>
 </section>
 
 <section class="card">
-    <h2>Top pages by event volume</h2>
+    <h2>Top pages by total events</h2>
+    <p>This bar chart shows which tracked page URLs generated the highest number of recorded events.</p>
     <canvas id="eventsByPageChart" height="120"></canvas>
 </section>
 
@@ -50,9 +51,29 @@ function buildChart(elementId, chartType, labels, values, label) {
         options: {
             responsive: true,
             maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Event count'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: chartType === 'bar' && elementId === 'eventsByTypeChart'
+                            ? 'Event type'
+                            : 'Page URL'
+                    }
                 }
             }
         }
@@ -66,15 +87,15 @@ loadChartData()
             'bar',
             payload.eventsByType.labels,
             payload.eventsByType.values,
-            'Events'
+            'Number of events'
         );
 
         buildChart(
             'eventsByPageChart',
-            'line',
+            'bar',
             payload.eventsByPage.labels,
             payload.eventsByPage.values,
-            'Events'
+            'Total events per page'
         );
     })
     .catch(function (error) {
