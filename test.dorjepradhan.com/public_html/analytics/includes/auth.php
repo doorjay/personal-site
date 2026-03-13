@@ -16,7 +16,11 @@ function is_logged_in(): bool
 
 function login_attempt(string $username, string $password): bool
 {
-    $sql = 'SELECT id, username, password_hash, display_name, role FROM admin_users WHERE username = ? AND is_active = 1 LIMIT 1';
+    $sql = 'SELECT id, username, password_hash, display_name, role
+            FROM admin_users
+            WHERE username = ? AND is_active = 1
+            LIMIT 1';
+
     $stmt = db()->prepare($sql);
     $stmt->execute([$username]);
     $user = $stmt->fetch();
@@ -25,14 +29,29 @@ function login_attempt(string $username, string $password): bool
         return false;
     }
 
+    $allowedSections = [];
+
+    if ($user['role'] === 'analyst') {
+        $sectionSql = 'SELECT s.slug
+                       FROM sections s
+                       INNER JOIN user_sections us ON us.section_id = s.id
+                       WHERE us.user_id = ?
+                       ORDER BY s.slug ASC';
+
+        $sectionStmt = db()->prepare($sectionSql);
+        $sectionStmt->execute([(int) $user['id']]);
+        $allowedSections = array_column($sectionStmt->fetchAll(), 'slug');
+    }
+
     session_regenerate_id(true);
+
     $_SESSION['auth_user'] = [
-    'id' => (int) $user['id'],
-    'username' => $user['username'],
-    'display_name' => $user['display_name'],
-    'role' => $user['role'],
-    'sections' => $allowedSections,
-];
+        'id' => (int) $user['id'],
+        'username' => $user['username'],
+        'display_name' => $user['display_name'],
+        'role' => $user['role'],
+        'sections' => $allowedSections,
+    ];
 
     return true;
 }
@@ -43,7 +62,15 @@ function logout_user(): void
 
     if (ini_get('session.use_cookies')) {
         $params = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'] ?? '', (bool) $params['secure'], (bool) $params['httponly']);
+        setcookie(
+            session_name(),
+            '',
+            time() - 42000,
+            $params['path'],
+            $params['domain'] ?? '',
+            (bool) $params['secure'],
+            (bool) $params['httponly']
+        );
     }
 
     session_destroy();
@@ -96,6 +123,10 @@ function can_access_section(string $slug): bool
     }
 
     if ($role === 'viewer') {
+        return false;
+    }
+
+    if ($role !== 'analyst') {
         return false;
     }
 
