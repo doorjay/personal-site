@@ -16,7 +16,7 @@ function is_logged_in(): bool
 
 function login_attempt(string $username, string $password): bool
 {
-    $sql = 'SELECT id, username, password_hash, display_name FROM admin_users WHERE username = ? AND is_active = 1 LIMIT 1';
+    $sql = 'SELECT id, username, password_hash, display_name, role FROM admin_users WHERE username = ? AND is_active = 1 LIMIT 1';
     $stmt = db()->prepare($sql);
     $stmt->execute([$username]);
     $user = $stmt->fetch();
@@ -27,10 +27,12 @@ function login_attempt(string $username, string $password): bool
 
     session_regenerate_id(true);
     $_SESSION['auth_user'] = [
-        'id' => (int) $user['id'],
-        'username' => $user['username'],
-        'display_name' => $user['display_name'],
-    ];
+    'id' => (int) $user['id'],
+    'username' => $user['username'],
+    'display_name' => $user['display_name'],
+    'role' => $user['role'],
+    'sections' => $allowedSections,
+];
 
     return true;
 }
@@ -55,4 +57,60 @@ function require_login(): void
 
     flash('Please log in to view the analytics backend.', 'error');
     redirect(base_url('login.php'));
+}
+
+function current_role(): ?string
+{
+    return $_SESSION['auth_user']['role'] ?? null;
+}
+
+function has_role(string $role): bool
+{
+    return current_role() === $role;
+}
+
+function require_role(array $roles): void
+{
+    require_login();
+
+    if (in_array(current_role(), $roles, true)) {
+        return;
+    }
+
+    http_response_code(403);
+    require __DIR__ . '/../errors/403.php';
+    exit;
+}
+
+function allowed_sections(): array
+{
+    return $_SESSION['auth_user']['sections'] ?? [];
+}
+
+function can_access_section(string $slug): bool
+{
+    $role = current_role();
+
+    if ($role === 'super_admin') {
+        return true;
+    }
+
+    if ($role === 'viewer') {
+        return false;
+    }
+
+    return in_array($slug, allowed_sections(), true);
+}
+
+function require_section(string $slug): void
+{
+    require_login();
+
+    if (can_access_section($slug)) {
+        return;
+    }
+
+    http_response_code(403);
+    require __DIR__ . '/../errors/403.php';
+    exit;
 }
