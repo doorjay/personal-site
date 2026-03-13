@@ -35,9 +35,14 @@ function render_header(string $title): void
 
     <?php if ($user): ?>
         <nav class="nav-card">
-            <a href="<?= e(base_url('dashboard.php')) ?>">Dashboard</a>
-            <a href="<?= e(base_url('reports.php')) ?>">Reports Table</a>
-            <a href="<?= e(base_url('charts.php')) ?>">Charts</a>
+            <?php if (in_array(current_role(), ['super_admin', 'analyst'], true)): ?>
+                <a href="<?= e(base_url('dashboard.php')) ?>">Dashboard</a>
+                <a href="<?= e(base_url('reports.php')) ?>">Reports Table</a>
+                <a href="<?= e(base_url('charts.php')) ?>">Charts</a>
+                <a href="<?= e(base_url('report-create.php')) ?>">Create Report</a>
+            <?php endif; ?>
+
+            <a href="<?= e(base_url('saved-reports.php')) ?>">Saved Reports</a>
             <a href="/index.html">Back to test site</a>
         </nav>
     <?php endif; ?>
