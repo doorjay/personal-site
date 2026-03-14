@@ -14,7 +14,7 @@ $reportId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if ($reportId <= 0) {
     http_response_code(404);
-    echo 'Report not found.';
+    require __DIR__ . '/errors/404.php';
     exit;
 }
 
@@ -37,7 +37,7 @@ $report = $stmt->fetch();
 
 if (!$report) {
     http_response_code(404);
-    echo 'Report not found.';
+    require __DIR__ . '/errors/404.php';
     exit;
 }
 

@@ -5,3 +5,4 @@ config.local.php
 secrets/
 vendor/
 composer.*
+.htaccess
