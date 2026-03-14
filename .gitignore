@@ -3,3 +3,5 @@
 config.local.php
 */config.local.php
 secrets/
+vendor/
+composer.*
