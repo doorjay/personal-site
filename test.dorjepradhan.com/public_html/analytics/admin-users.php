@@ -10,7 +10,10 @@ $pdo = db();
 $error = null;
 
 $allSections = $pdo->query(
-    'SELECT id, slug, name
+    'SELECT
+        id,
+        slug,
+        name
      FROM sections
      ORDER BY name ASC'
 )->fetchAll();
@@ -35,6 +38,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Invalid role selected.';
     }
 
+    $targetUser = null;
+
+    if ($error === null) {
+        $targetStmt = $pdo->prepare(
+            'SELECT
+                id,
+                username,
+                role,
+                is_active
+             FROM admin_users
+             WHERE id = ?
+             LIMIT 1'
+        );
+        $targetStmt->execute([$userId]);
+        $targetUser = $targetStmt->fetch();
+
+        if (!$targetUser) {
+            $error = 'User not found.';
+        }
+    }
+
+    if ($error === null && (string) $targetUser['username'] === 'superadmin') {
+        if ($role !== 'super_admin' || $isActive !== 1) {
+            $error = 'The primary super admin account cannot be demoted or deactivated.';
+        }
+
+        $sectionIds = [];
+    }
+
     if ($error === null) {
         $updateSql = 'UPDATE admin_users
                       SET display_name = ?, role = ?, is_active = ?
@@ -53,7 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $deleteStmt->execute([$userId]);
 
         if ($role === 'analyst' && $sectionIds !== []) {
-            $insertSql = 'INSERT INTO user_sections (user_id, section_id) VALUES (?, ?)';
+            $insertSql = 'INSERT INTO user_sections (user_id, section_id)
+                          VALUES (?, ?)';
             $insertStmt = $pdo->prepare($insertSql);
 
             foreach ($sectionIds as $sectionId) {
@@ -91,13 +124,13 @@ $sectionMapRows = $pdo->query(
 
 $userSections = [];
 foreach ($sectionMapRows as $row) {
-    $userId = (int) $row['user_id'];
+    $mappedUserId = (int) $row['user_id'];
 
-    if (!isset($userSections[$userId])) {
-        $userSections[$userId] = [];
+    if (!isset($userSections[$mappedUserId])) {
+        $userSections[$mappedUserId] = [];
     }
 
-    $userSections[$userId][] = [
+    $userSections[$mappedUserId][] = [
         'id' => (int) $row['section_id'],
         'slug' => (string) $row['slug'],
         'name' => (string) $row['name'],
@@ -123,6 +156,7 @@ render_header('User Management');
         static fn(array $section): int => (int) $section['id'],
         $assignedSections
     );
+    $isProtectedSuperAdmin = ((string) $userRow['username'] === 'superadmin');
     ?>
     <section class="card">
         <h2><?= e((string) $userRow['username']) ?></h2>
@@ -130,6 +164,11 @@ render_header('User Management');
 
         <form method="post" class="stack-form">
             <input type="hidden" name="user_id" value="<?= $userId ?>">
+
+            <?php if ($isProtectedSuperAdmin): ?>
+                <input type="hidden" name="role" value="super_admin">
+                <input type="hidden" name="is_active" value="1">
+            <?php endif; ?>
 
             <label>
                 Display name
@@ -143,7 +182,7 @@ render_header('User Management');
 
             <label>
                 Role
-                <select name="role" required>
+                <select name="role" required <?= $isProtectedSuperAdmin ? 'disabled' : '' ?>>
                     <option value="super_admin" <?= $userRow['role'] === 'super_admin' ? 'selected' : '' ?>>Super Admin</option>
                     <option value="analyst" <?= $userRow['role'] === 'analyst' ? 'selected' : '' ?>>Analyst</option>
                     <option value="viewer" <?= $userRow['role'] === 'viewer' ? 'selected' : '' ?>>Viewer</option>
@@ -156,6 +195,7 @@ render_header('User Management');
                     name="is_active"
                     value="1"
                     <?= (int) $userRow['is_active'] === 1 ? 'checked' : '' ?>
+                    <?= $isProtectedSuperAdmin ? 'disabled' : '' ?>
                 >
                 <span>Active user</span>
             </label>
@@ -163,9 +203,15 @@ render_header('User Management');
             <fieldset class="section-fieldset">
                 <legend>Analyst section access</legend>
 
-                <p class="fieldset-help">
-                    These section assignments only apply when the user role is set to Analyst.
-                </p>
+                <?php if ($isProtectedSuperAdmin): ?>
+                    <p class="fieldset-help">
+                        This account is protected and always remains an active super admin.
+                    </p>
+                <?php else: ?>
+                    <p class="fieldset-help">
+                        These section assignments only apply when the user role is set to Analyst.
+                    </p>
+                <?php endif; ?>
 
                 <div class="checkbox-group">
                     <?php foreach ($allSections as $section): ?>
@@ -175,6 +221,7 @@ render_header('User Management');
                                 name="section_ids[]"
                                 value="<?= (int) $section['id'] ?>"
                                 <?= in_array((int) $section['id'], $assignedSectionIds, true) ? 'checked' : '' ?>
+                                <?= $isProtectedSuperAdmin ? 'disabled' : '' ?>
                             >
                             <span><?= e((string) $section['name']) ?></span>
                         </label>
@@ -185,15 +232,13 @@ render_header('User Management');
             <?php if ($assignedSections !== []): ?>
                 <p>
                     <strong>Current assigned sections:</strong>
-                    <?php
-                    echo e(implode(
+                    <?= e(implode(
                         ', ',
                         array_map(
                             static fn(array $section): string => (string) $section['name'],
                             $assignedSections
                         )
-                    ));
-                    ?>
+                    )) ?>
                 </p>
             <?php else: ?>
                 <p><strong>Current assigned sections:</strong> None</p>
