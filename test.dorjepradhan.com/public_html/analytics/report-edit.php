@@ -155,9 +155,9 @@ render_header('Edit Report');
             <textarea name="filters_json" rows="6"><?= e($filtersJson) ?></textarea>
         </label>
 
-        <label>
+        <label class="checkbox-row">
+            <span>Publish this report</span>
             <input type="checkbox" name="is_published" value="1" <?= $isPublished === 1 ? 'checked' : '' ?>>
-            Publish this report
         </label>
 
         <button class="button" type="submit">Update report</button>

@@ -22,7 +22,7 @@ function render_header(string $title): void
 <div class="page-shell">
     <header class="topbar">
         <div>
-            <p class="eyebrow">Checkpoint backend</p>
+            <p class="eyebrow">Analytics reporting platform</p>
             <h1><?= e($title) ?></h1>
         </div>
         <?php if ($user): ?>
@@ -37,13 +37,16 @@ function render_header(string $title): void
         <nav class="nav-card">
             <?php if (in_array(current_role(), ['super_admin', 'analyst'], true)): ?>
                 <a href="<?= e(base_url('dashboard.php')) ?>">Dashboard</a>
+                <a href="<?= e(base_url('performance.php')) ?>">Performance</a>
+                <a href="<?= e(base_url('behavior.php')) ?>">Behavior</a>
+                <a href="<?= e(base_url('system-health.php')) ?>">System Health</a>
                 <a href="<?= e(base_url('reports.php')) ?>">Reports Table</a>
                 <a href="<?= e(base_url('charts.php')) ?>">Charts</a>
                 <a href="<?= e(base_url('report-create.php')) ?>">Create Report</a>
             <?php endif; ?>
 
             <a href="<?= e(base_url('saved-reports.php')) ?>">Saved Reports</a>
-            <a href="/index.html">Back to test site</a>
+            <a class="button-secondary" href="/index.html">Back to test site</a>
         </nav>
     <?php endif; ?>
 
