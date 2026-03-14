@@ -73,11 +73,13 @@ render_header('View Report');
     <pre><?= e((string) ($report['filters_json'] ?? '{}')) ?></pre>
 </section>
 
-<?php if (in_array($role, ['super_admin', 'analyst'], true)): ?>
-    <section class="card">
+<section class="card">
+    <?php if (in_array($role, ['super_admin', 'analyst'], true)): ?>
         <a class="button" href="<?= e(base_url('report-edit.php?id=' . (int) $report['id'])) ?>">Edit report</a>
-    </section>
-<?php endif; ?>
+    <?php endif; ?>
+
+    <a class="button" href="<?= e(base_url('report-export.php?id=' . (int) $report['id'])) ?>">Export PDF</a>
+</section>
 
 <?php
 render_footer();
