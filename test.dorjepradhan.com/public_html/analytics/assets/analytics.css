@@ -450,6 +450,36 @@
         margin-bottom: 0;
         padding-left: 1.25rem;
     }
+
+    .section-fieldset
+    {
+        margin: 0;
+        padding: var(--space-4);
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-sm);
+
+        legend
+        {
+            padding: 0 var(--space-2);
+            font-weight: 600;
+            color: var(--color-text-strong);
+        }
+
+        .fieldset-help
+        {
+            margin-bottom: var(--space-3);
+            color: var(--color-text-soft);
+            font-size: 0.95rem;
+        }
+
+        .checkbox-group
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: var(--space-3);
+        }
+    }
 }
 
 @layer utilities

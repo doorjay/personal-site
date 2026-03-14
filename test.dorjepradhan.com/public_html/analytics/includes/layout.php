@@ -45,6 +45,10 @@ function render_header(string $title): void
                 <a href="<?= e(base_url('report-create.php')) ?>">Create Report</a>
             <?php endif; ?>
 
+            <?php if (current_role() === 'super_admin'): ?>
+                <a href="<?= e(base_url('admin-users.php')) ?>">User Management</a>
+            <?php endif; ?>
+
             <a href="<?= e(base_url('saved-reports.php')) ?>">Saved Reports</a>
             <a class="button-secondary" href="/index.html">Back to test site</a>
         </nav>
