@@ -1,119 +1,101 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSE 135</title>
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Dorjé Pradhan, a front-end developer graduating from UC San Diego.">
+  <title>Dorjé Pradhan | Front-End Developer</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
 </head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G6DS5JL025"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-G6DS5JL025');
-</script>
-
-<script src="https://cdn.logr-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
-<script>window.LogRocket && window.LogRocket.init('9ieqjh/dorjepradhancom');</script>
-
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vbhulisa5u");
-</script>
-
 <body>
-  <h1>CSE 135</h1>
-  <h2>Winter 2026</h2>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <hr>
+  <header class="site-header" aria-label="Site header">
+    <a class="site-logo" href="index.html" aria-label="Dorjé Pradhan home">Dorjé Pradhan</a>
 
-  <team-info>
-    <h2>Team Dorjé</h2>
-    <p>Team Members</p>
-    <ul>
-      <li><a href="/members/dorjepradhan.html">Dorjé Pradhan</a></li>
-    </ul>
-  </team-info>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <theme-switcher aria-label="Theme switcher">
+      <button type="button" aria-pressed="false">Chalkboard Mode</button>
+    </theme-switcher>
+  </header>
 
+  <main id="main-content" class="page page-home">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">UC San Diego · Front-End Development</p>
+      <h1 id="hero-title">I build interactive web experiences with clean structure and playful details.</h1>
+      <p class="hero-summary">
+        I’m Dorjé Pradhan, a front-end developer graduating from UC San Diego. 
+        This portfolio is built like a working notebook: practical, semantic, responsive, 
+        and designed to make the web feel a little more human.
+      </p>
 
-  <hr>
+      <nav class="hero-actions" aria-label="Featured links">
+        <ul>
+          <li><a class="button button-primary" href="projects.html">View Projects</a></li>
+          <li><a class="button" href="resume.html">View Resume</a></li>
+          <li><a class="button" href="https://github.com/doorjay" rel="me">GitHub</a></li>
+        </ul>
+      </nav>
+    </section>
 
-  <assignment-body>
-    <h2>Assignments</h2>
-    
-    <assignment-item>
-      <h3>Homework 1</h3>
-    <ul>
-      <li><a href="/hw1/hello.php">PHP</a></li>
-      <li><a href="/hw1/report.html">Analytics</a></li>
-    </ul>
-    </assignment-item>
-    
-    <assignment-item>
-      <h3>Homework 2</h3>
-      <ol>
-        <li>Perl
-          <ul>
-            <li><a href="hw2/perl/perl-hello-html-world.pl">Hello, Perl!</a></li>
-            <li><a href="hw2/perl/perl-hello-json-world.pl">Hello, Perl!(JSON)</a></li>
-            <li><a href="hw2/perl/perl-env.pl">Environment Variables (Manual)</a></li>
-            <li><a href="hw2/perl/perl-env-pm.pl">Environment Variables (CGI.pm)</a></li>
-            <li><a href="hw2/perl/perl-get-echo.pl">GET Echo</a></li>
-            <li><a href="hw2/perl/perl-post-echo.pl">POST Echo</a></li>
-            <li><a href="hw2/perl/perl-general-echo.pl">General Echo</a></li>
-            <li><a href="hw2/perl/perl-sessions-1.pl">Sessioning</a></li>
-          </ul>
-        </li>
+    <section class="intro-grid" aria-labelledby="intro-title">
+      <h2 id="intro-title">What this site is meant to show</h2>
 
-        <li>C/C++
-          <ul>
-            <li><a href="hw2/c/hello-html-cpp.cgi">Hello, C++!</a></li>
-            <li><a href="hw2/c/hello-json-cpp.cgi">Hello, C++!(JSON)</a></li>
-            <li><a href="hw2/c/environment-cpp.cgi">Environment Variables</a></li>
-            <li><a href="hw2/c/echo-cpp.cgi">Echo (C++)</a></li>
-            <li><a href="hw2/c/state-set-cpp.cgi">States (C++)</a></li>
-          </ul>
-        </li>
+      <article>
+        <h3>Semantic HTML</h3>
+        <p>Pages are structured around meaningful elements first, with custom elements reserved for interface pieces that need their own behavior.</p>
+      </article>
 
-        <li>Python
-          <ul>
-            <li><a href="hw2/python/hello-html-python.py">Hello, Python!</a></li>
-            <li><a href="hw2/python/hello-json-python.py">Hello, Python!(JSON)</a></li>
-            <li><a href="hw2/python/environment-python.py">Environment Variables</a></li>
-            <li><a href="hw2/python/echo-python.py">Echo (Python)</a></li>
-            <li><a href="hw2/python/state-set-python.py">States (Python)</a></li>
+      <article>
+        <h3>Modern CSS</h3>
+        <p>The visual system is designed around native CSS features: custom properties, layers, nesting, container-friendly layouts, and theme tokens.</p>
+      </article>
 
-          </ul>
-        </li>
+      <article>
+        <h3>Thoughtful interaction</h3>
+        <p>The site is designed to be useful before it is flashy, with room for guided-tour interactions, notebook details, and chalkboard mode later.</p>
+      </article>
+    </section>
 
-        <li>Ruby
-          <ul>
-            <li><a href="hw2/ruby/hello-html-ruby.rb">Hello, Ruby!</a></li>
-            <li><a href="hw2/ruby/hello-json-ruby.rb">Hello, Ruby!(JSON)</a></li>
-            <li><a href="hw2/ruby/environment-ruby.rb">Environment Variables</a></li>
-            <li><a href="hw2/ruby/echo-ruby.rb">Echo (Ruby)</a></li>
-            <li><a href="hw2/ruby/state-set-ruby.rb">States (Ruby)</a></li>
-          </ul>
-        </li>
+    <section class="featured-work" aria-labelledby="featured-work-title">
+      <header>
+        <p class="eyebrow">Selected work</p>
+        <h2 id="featured-work-title">Projects worth opening first</h2>
+        <p>These are the projects I’d want a recruiter or engineering manager to see before anything else.</p>
+      </header>
 
-      </ol>
-    </assignment-item>
-    
-    
+      <article class="project-preview">
+        <header>
+          <h3>Project Name</h3>
+          <p>Short, outcome-focused description of the project and what problem it solves.</p>
+        </header>
 
-    <h3>Analytics App</h3>
-    <p>TBD</p>
-  </assignment-body>
-  
+        <ul class="tag-list" aria-label="Technologies used">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
 
+        <footer>
+          <a href="projects.html#project-name">Read case study</a>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <time datetime="2026">2026</time> Dorjé Pradhan.</p>
+    <address>
+      <a href="mailto:hello@dorjepradhan.com">hello@dorjepradhan.com</a>
+    </address>
+  </footer>
 </body>
-
 </html>
